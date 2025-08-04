@@ -1,3 +1,4 @@
+/*
 resource "google_bigquery_dataset" "ml_dataset" {
     dataset_id                  = "GermanCredit" # Replace with your desired dataset ID
     friendly_name               = "GermanCredit dataset"
@@ -12,6 +13,7 @@ resource "google_bigquery_dataset" "ml_dataset" {
 resource "google_bigquery_table" "batch-table" {
   dataset_id = google_bigquery_dataset.ml_dataset.dataset_id
   table_id   = "GermanCreditTable"
+  deletion_protection = false
   schema = jsonencode([
     {
       "name": "Existing_account",
@@ -124,6 +126,7 @@ resource "google_bigquery_table" "batch-table" {
 resource "google_bigquery_table" "streaming-table" {
   dataset_id = google_bigquery_dataset.ml_dataset.dataset_id
   table_id   = "GermanCreditTable-streaming"
+  deletion_protection = false
   schema = jsonencode([
     {
       "name": "Existing_account",
@@ -237,3 +240,4 @@ resource "google_bigquery_table" "streaming-table" {
 	}
   ])
 }
+*/
