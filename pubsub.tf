@@ -1,3 +1,4 @@
+/*
 # Create a Pub/Sub topic
 resource "google_pubsub_topic" "streaming_data" {
   name = "german_credit_data"
@@ -23,3 +24,4 @@ resource "google_pubsub_subscription" "model_monitoring_subscription" {
 
   ack_deadline_seconds = 60  # how long subscriber has to ack
 }
+*/

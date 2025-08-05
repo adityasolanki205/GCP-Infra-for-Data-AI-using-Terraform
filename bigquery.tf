@@ -3,7 +3,7 @@ resource "google_bigquery_dataset" "ml_dataset" {
     dataset_id                  = "GermanCredit" # Replace with your desired dataset ID
     friendly_name               = "GermanCredit dataset"
     description                 = "GermanCredit dataset created from terraform"
-    location                    = "asia-south2" # Replace with your desired location (e.g., "US", "EU")
+    location                    = "asia-south1" # Replace with your desired location (e.g., "US", "EU")
     default_table_expiration_ms = 3600000 # Optional: default table expiration in milliseconds (e.g., 1 hour)
     labels = {
     environment = "development"

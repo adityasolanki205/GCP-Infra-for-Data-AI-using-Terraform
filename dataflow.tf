@@ -3,7 +3,7 @@ resource "google_dataflow_job" "batch_job" {
   name       = "germananalysis"
   template_gcs_path    = "gs://demo_bucket_kfl/Template/germananalysis_batch"
   temp_gcs_location    = "gs://demo_bucket_kfl/Temp"
-  region               = "asia-south2"
+  region               = "asia-south1"
   on_delete            = "cancel"  # optional: cancel job if resource is destroyed
   max_workers          = 2         # optional
 
