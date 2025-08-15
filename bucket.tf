@@ -41,6 +41,7 @@ resource "google_storage_bucket_object" "subfolder_stage" {
 resource "google_storage_bucket_object" "subfolder_template" {
   name   = "Template/"  
   bucket = google_storage_bucket.kubeflow-testing.name
+  source = '/home/aditya_solanki205/GCP-Infra-for-Data-AI-using-Terraform/Template/*'
   content = "template" 
 }
 
@@ -49,4 +50,10 @@ resource "google_storage_bucket_object" "subfolder_pipeline_root" {
   bucket = google_storage_bucket.kubeflow-testing.name
   content = "pipeline_root_demo" 
 }
+
+resource "google_storage_bucket_object" "function_source_archive" {
+      name   = "function.zip"
+      bucket = google_storage_bucket.kubeflow-testing.name
+      source = "/home/aditya_solanki205/GCP-Infra-for-Data-AI-using-Terraform/function.zip" # Path to your local zip file
+    }
 */

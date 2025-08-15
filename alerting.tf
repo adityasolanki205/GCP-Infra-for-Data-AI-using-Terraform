@@ -31,9 +31,8 @@ resource "google_monitoring_alert_policy" "output_drift_alert" {
 
     condition_threshold {
       filter = <<EOT
-            metric.type="aiplatform.googleapis.com/endpoint/prediction_output_drift"
-            AND resource.type="vertex_ai_endpoint"
-            EOT
+        metric.type="aiplatform.googleapis.com/endpoint/prediction_output_drift"
+      EOT
 
       duration         = "60s"
       comparison       = "COMPARISON_GT"

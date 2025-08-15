@@ -16,5 +16,4 @@ resource "google_artifact_registry_repository" "demo_mode_repo" {
     managed_by  = "terraform"
   }
 }
-
 */

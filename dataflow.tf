@@ -37,7 +37,7 @@ resource "google_dataflow_job" "streaming_job" {
   name              = "ml-stream-analysis"
   template_gcs_path = "gs://demo_bucket_kfl/Template/germananalysis_streaming"
   temp_gcs_location = "gs://demo_bucket_kfl/Temp"
-  region            = "asia-south1"
+  region            = var.region
   on_delete         = "cancel"
   max_workers       = 1
   enable_streaming_engine = true
