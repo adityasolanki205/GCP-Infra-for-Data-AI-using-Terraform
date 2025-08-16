@@ -644,7 +644,7 @@ resource "google_cloudfunctions2_function" "pubsub_fn" {
 ##### Related code
 1. [run_functions.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/run_functions.tf)
 
-#### 🎥 ***Demo Videos***
+#### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/e7fbe515-aa10-463f-b50b-78767498d13a
 
 
