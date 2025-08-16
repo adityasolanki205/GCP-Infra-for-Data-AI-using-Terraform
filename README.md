@@ -67,164 +67,70 @@ For the last few years, I have been part of a great learning curve wherein I hav
     git clone https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform.git
 ```
 
-## Initial Setup
 
-Below are the steps to setup the enviroment and run the codes:
- 
-1. **Setup**: First we will have to setup free google cloud account which can be done [here](https://cloud.google.com/free). Then we need to Download the data from [German Credit Risk](https://www.kaggle.com/uciml/german-credit). Also present in the repository [here](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/german_data.csv)
+## Pipeline construction using Terraform components
 
-2. **Creating a Vertex AI Workbench, Cloud Storage bucket and SDK**: Here will we will create workbench to run the Kubeflow pipeline and S3 bucket to be used in the process.
+### 1. **Create GCS Buckets**
 
-    - Goto to Vertex AI workbench
-    - Select Instances, Click on Create New and create the instance in asia-south1 with default settings
-    - After the instance becomes active, click on Juptyter Labs. Open a terminal and run the below command.
-    ```bash
-       git clone https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline.git
-       cd Unified-ETL-DWH-MLOps-Pipeline
-    ```
-    - Similarly copy the commands in Cloud sdk as well.
-    ```bash
-        git clone https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline.git
-        cd Unified-ETL-DWH-MLOps-Pipeline
-    ```
-    - Goto to Storage Bucket
-    - Click on create new and create a bucket with default setting in asia-south1 with the name 'demo-bucket-kfl'
-    - Copy the file using 'gsutil cp german_data.csv gs://demo_bucket_kfl/'
+Now we will go step by step to create Storage bucket to be used for raw data, processed datasets, model artifacts, and logs.
 
-#### 🎥 ***Demo Video***
-https://github.com/user-attachments/assets/89739148-baa3-4d95-9371-b2bab4ae4ead
+```hcl
+resource "google_storage_bucket" "kubeflow-testing" {
+  name     = var.bucket_name
+  location = var.bucket_location
+  storage_class = "STANDARD"
 
-3. **Creating a Artifact Registry**: We will now create a Repository for our Docker Image to be stored. Process is provded below.
+  uniform_bucket_level_access = true
+  force_destroy = true
 
-    - Goto to Artifact registry.
-    - Click on create Repository, use default setting to create a Docker Repository in asia-south1 and the name
-      'kubeflow-pipelines'
+  versioning {
+    enabled = false
+  }
 
-#### 🎥 ***Demo Video***
-https://github.com/user-attachments/assets/76903e65-c08c-46f9-b86b-34de96268290
+  lifecycle_rule {
+    action {
+      type = "Delete"
+   }
+    condition {
+      age = 30
+    }
+  }
 
-4. **Creating the Docker Image**: After creating the repository we will create the docker Image for Kubeflow Components. This will also install all the required libraries:
+  labels = {
+    environment = "dev"
+    purpose     = "bucket-testing"
+  }
+}
 
-   - To create this image we go back to workbench.
-   - Now we run the docker_build. This file contains all the commands to create the image. It also contains requirements.txt file to install all the dependancies.
-     
-    requirements.txt
-    ```text
-        pandas
-        numpy
-        scikit-learn
-        joblib
-        Cython
-        hyperopt
-        kfp
-        db-dtypes
-        
-        # Google Cloud libraries
-        google-cloud-aiplatform
-        google-cloud-storage
-        google-cloud-pubsub
-        google-cloud-bigquery
-        google-cloud-bigquery-storage
-        googleapis-common-protos
-    ```
-    
-    docker_build.sh
-    ```bash
-        FROM gcr.io/deeplearning-platform-release/base-cpu
-        
-        WORKDIR /
-        COPY training_pipeline.py /
-        COPY requirements.txt /
-        COPY ./src/ /src
-        RUN pip install --upgrade pip && pip install -r requirements.txt
-    ```
-    - To create the image, we run the command below
+resource "google_storage_bucket_object" "subfolder_temp" {
+  name   = "Temp/"   
+  bucket = google_storage_bucket.kubeflow-testing.name
+  content = "temp" 
+}
 
-    ```bash
-       bash docker_build.sh
-    ```
-##### Related codes
-1. [dockerfile](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/Dockerfile)
-2. [requirements.txt](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/requirements.txt)
-3. [docker_build.sh](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/docker_build.sh)
+resource "google_storage_bucket_object" "subfolder_stage" {
+  name   = "Stage/"  
+  bucket = google_storage_bucket.kubeflow-testing.name
+  content = "stage" 
+}
 
-#### 🎥 ***Demo Video***
-https://github.com/user-attachments/assets/0ccded59-f2c7-4e1d-863b-c790e7eab21a
+resource "google_storage_bucket_object" "subfolder_template" {
+  name   = "Template/"  
+  bucket = google_storage_bucket.kubeflow-testing.name
+  content = "template" 
+}
 
-5. **Generating Streaming Data**: We need to generate streaming data that can be published to Pub Sub. Then those messages will be picked to be processed by the pipeline. To generate data we will use **random()** library to create input messages. Using the generating_data.py we will be able to generate random data in the required format. This generated data will be published to Pub/Sub using publish_to_pubsub.py. Here we will use PublisherClient object, add the path to the topic using the topic_path method and call the publish_to_pubsub() function while passing the topic_path and data.
+resource "google_storage_bucket_object" "subfolder_pipeline_root" {
+  name   = "pipeline_root_demo/"  
+  bucket = google_storage_bucket.kubeflow-testing.name
+  content = "pipeline_root_demo" 
+}
 
-```python
-import random
-
-LINE ="""   {Existing_account} 
-        {Duration_month} 
-        {Credit_history} 
-        {Purpose} 
-        {Credit_amount} 
-        .....
-        {Foreign_worker}"""
-
-def generate_log():
-existing_account = ['B11','A12','C14',
-                    'D11','E11','A14',
-                    'G12','F12','A11',
-                    'H11','I11',
-                    'J14','K14','L11',
-                    'A13'
-                   ]
-Existing_account = random.choice(existing_account)
-
-duration_month = []
-for i  in range(6, 90 , 3):
-    duration_month.append(i)
-Duration_month = random.choice(duration_month)
-....
-Foreign_worker = ['A201',
-                'A202']
-Foreign_worker = random.choice(foreign_worker)
-log_line = LINE.format(
-    Existing_account=Existing_account,
-    Duration_month=Duration_month,
-    Credit_history=Credit_history,
-    Purpose=Purpose,
-    ...
-    Foreign_worker=Foreign_worker
-)
-
-return log_line
-
-```
-
-##### Related code
-1. [generating_data.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/generating_data.py)
-
-## Pipeline construction
-
-### 1. **Reading the Data**
-
-Now we will go step by step to create a pipeline starting with reading the data. The data is read using **beam.io.ReadFromText()**. Here we will just read the input values and save it in a file. The output is stored in text file named simpleoutput.
-
-```python
-def run(argv=None, save_main_session=True):
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-      '--input',
-      dest='input',
-      help='Input file to process')
-    parser.add_argument(
-      '--output',
-      dest='output',
-      default='../output/result.txt',
-      help='Output file to write results to.')
-    known_args, pipeline_args = parser.parse_known_args(argv)
-    options = PipelineOptions(pipeline_args)
-    with beam.Pipeline(options=PipelineOptions()) as p:
-        data = (p 
-                | 'Read Data' >> beam.io.ReadFromText(known_args.input)
-                | 'Filter Header' >> beam.Filter(lambda line: not line.startswith("Existing account"))
-            ) 
-if __name__ == '__main__':
-    run()
+resource "google_storage_bucket_object" "function_source_archive" {
+      name   = "function.zip"
+      bucket = google_storage_bucket.kubeflow-testing.name
+      source = "/home/aditya_solanki205/GCP-Infra-for-Data-AI-using-Terraform/function.zip" # Path to your local zip file
+    }
 ``` 
 
 ### 2. **Create Batch Dataflow Job**
