@@ -163,7 +163,7 @@ gsutil cp german_data.csv gs://demo_bucket_kfl/
 ```
 
 ##### Related code
-1. [generating_data.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/generating_data.py)
+1. [bucket.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/bucket.tf)
 
 #### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/c9bbe6e5-7d9c-41a7-9990-170e48341547
@@ -201,7 +201,7 @@ resource "google_pubsub_subscription" "model_monitoring_subscription" {
 }
 ```
 ##### Related code
-1. [generating_data.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/generating_data.py)
+1. [pubsub.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/pubsub.tf)
 
 #### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/ff374a86-0065-4fd1-b6d9-c02c7c5ab317
@@ -457,7 +457,7 @@ resource "google_bigquery_table" "streaming-table" {
 ```
 
 ##### Related code
-1. [batch-pipeline.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/batch-pipeline.py)
+1. [bigquery.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/bigquery.tf)
 
 #### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/6474d376-dfbf-4b21-84d9-3f3e18c84c3e
@@ -490,7 +490,7 @@ resource "google_artifact_registry_repository" "demo_mode_repo" {
 }
 ```
 ##### Related Code
-1. [training_pipeline.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/training_pipeline.py)
+1. [registry.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/registry.tf)
 
 #### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/4622545d-fe28-4853-ae1e-cd91a6bc2ad7
@@ -540,7 +540,7 @@ resource "null_resource" "run_streaming_pipeline" {
 }
 ```
 ##### Related code
-1. [batch-pipeline.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/batch-pipeline.py)
+1. [dataflow.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/dataflow.tf)
 
 #### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/77a170cf-69ac-4fe7-be9b-6b9b42bec228
@@ -567,7 +567,9 @@ resource "google_workbench_instance" "default" {
 }
 ```
 ##### Related code
-1. [batch-pipeline.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/batch-pipeline.py)
+1. [workbench.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/workbench.tf)
+
+#### 🎥 ***Demo Video***
 
 
 ### 7. **Run pipeline from Workbench**
@@ -631,7 +633,7 @@ resource "google_cloudfunctions2_function" "pubsub_fn" {
 }
 ```
 ##### Related code
-1. [batch-pipeline.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/batch-pipeline.py)
+1. [run_functions.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/run_functions.tf)
 
 #### 🎥 ***Demo Videos***
 https://github.com/user-attachments/assets/e7fbe515-aa10-463f-b50b-78767498d13a
@@ -645,73 +647,9 @@ Comment all the codes and it will delete all the infrastructure.
 To test the code we need to do the following:
 
     1. Copy the repository in Cloud SDK using below command:
-    git clone https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline.git
+    git clone https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform.git
     
-    2. Create a Storage Bucket by the name 'demo_bucket_kfl' in asia-south1 and two sub folders Temp and Stage.
-    
-    3. Copy the data file in the cloud Bucket using the below command
-    cd ML_Pipeline_using_Kubeflow
-    gsutil cp german_data.csv gs://demo_bucket_kfl/
-    
-    4. Create a Dataset in asia-east1 by the name GermanCredit
-    
-    5. Create a table in GermanCredit dataset by the name GermanCreditTable. 
-        Schema is present at the starting of batch-pipeline.py
-
-    6. Create a table in GermanCredit dataset by the name GermanCreditTable-streaming. 
-        Schema is present at the starting of ml-streaming-pipeline-endpoint.py
-
-    7. Create Pub Sub Topic by the name german_credit_data and Model_Monitoring
-    
-    8. Install Apache Beam on the SDK using below command
-    pip3 install apache_beam[gcp]
-    
-    9. Command to run Batch job:
-     python3 batch-pipeline.py \
-     --runner DataFlowRunner \
-     --project solar-dialect-264808 \
-     --temp_location gs://demo_bucket_kfl/Temp \
-     --staging_location gs://demo_bucket_kfl/Stage \
-     --input gs://demo_bucket_kfl/german_data.csv \
-     --region asia-south1 \
-     --job_name germananalysis
-
-    10. Run the file training_pipeline.ipynb/training_pipeline.py in workbench. This will create a json file.
-    
-    11. Run the run_pipeline.ipynb file
-     
-    12. Verify of all the artifacts are created.
-    
-    13. The Streaming pipeline will run with below configuration only. To configure environment run commands present in update_python.ipynb
-        Python 3.11, apache-beam[gcp]==2.64.0
-
-    14. Run the pipeline using:
-    python3 ml-streaming-pipeline-endpoint.py \
-      --runner DataFlowRunner \
-      --project solar-dialect-264808 \
-      --bucket_name demo_bucket_kfl \
-      --temp_location gs://demo_bucket_kfl/Temp \
-      --staging_location gs://demo_bucket_kfl/Stage \
-      --region asia-south1 \
-      --job_name ml-stream-analysis \
-      --input_subscription projects/solar-dialect-264808/subscriptions/german_credit_data-sub \
-      --input_topic projects/solar-dialect-264808/topics/german_credit_data \
-      --save_main_session \
-      --setup_file ./setup.py \
-      --max_num_workers 1 \
-      --streaming
-      
-    15. Open one more tab in cloud SDK and run below command 
-    cd ML-Streaming-pipeline-using-Dataflow
-    python3 publish_to_pubsub.py
-
-    16. Goto Model Monitoring and setup model monitoring for output drift detection
-
-    17. Create a Alerting policy for Model output drift deviation with threshold as 0.3 and select notification 
-    channel as model_monitoring topic in pub sub. 
-
-    18. Create a Cloud Run functions that listens for Pub Sub and triggers retraining pipeline. So when cloud alerting
-    triggers a message to Pub sub, Cloud Run Functions gets invoked and starts retraining.
+    2. Keep following steps as mentioned above. 
 
 ## Credits
 1. Akash Nimare's [README.md](https://gist.github.com/akashnimare/7b065c12d9750578de8e705fb4771d2f#file-readme-md)
