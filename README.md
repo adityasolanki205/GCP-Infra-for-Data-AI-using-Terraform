@@ -162,6 +162,9 @@ gsutil cp ./Template/* gs://demo_bucket_kfl/Template/*
 gsutil cp german_data.csv gs://demo_bucket_kfl/
 ```
 
+##### Related code
+1. [generating_data.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/generating_data.py)
+
 #### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/c9bbe6e5-7d9c-41a7-9990-170e48341547
 
@@ -197,7 +200,10 @@ resource "google_pubsub_subscription" "model_monitoring_subscription" {
   ack_deadline_seconds = 60  # how long subscriber has to ack
 }
 ```
+##### Related code
+1. [generating_data.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/generating_data.py)
 
+#### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/ff374a86-0065-4fd1-b6d9-c02c7c5ab317
 
 
@@ -582,7 +588,7 @@ Also  terraform cannot create Vertex AI model monitoring. So please follow the v
 https://github.com/user-attachments/assets/f167feef-2ecd-441a-9aee-08c1bece8957
 
 - Cloud Alerting
-
+https://github.com/user-attachments/assets/be34bd76-9cc5-4ce6-a1c7-b2b0d9961700
 
 ### 9. **Deploy Cloud Functions**
 
@@ -627,6 +633,7 @@ resource "google_cloudfunctions2_function" "pubsub_fn" {
 
 #### 🎥 ***Demo Videos***
 https://github.com/user-attachments/assets/e7fbe515-aa10-463f-b50b-78767498d13a
+
 
 ### 10. **Delete Infrastructure (Optional)**
 
