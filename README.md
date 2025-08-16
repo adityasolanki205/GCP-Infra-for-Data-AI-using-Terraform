@@ -149,7 +149,7 @@ resource "google_storage_bucket_object" "function_source_archive" {
       source = "/home/<GCP User ID>/GCP-Infra-for-Data-AI-using-Terraform/function.zip" # Path to your local zip file
     }
 ```
-After this there a few files to be copied to GCS bucket. So run the commands below:
+After this there a few files to be copied to GCS bucket. So run the commands on SDK as mentioned below:
 
 ```cmd
 gsutil cp ./Template/* gs://demo_bucket_kfl/Template/*
