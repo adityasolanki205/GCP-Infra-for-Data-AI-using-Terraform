@@ -585,9 +585,11 @@ Also  terraform cannot create Vertex AI model monitoring. So please follow the v
 #### 🎥 ***Demo Videos***
 
 - Model Monitoring
+
 https://github.com/user-attachments/assets/f167feef-2ecd-441a-9aee-08c1bece8957
 
 - Cloud Alerting
+
 https://github.com/user-attachments/assets/be34bd76-9cc5-4ce6-a1c7-b2b0d9961700
 
 ### 9. **Deploy Cloud Functions**
