@@ -79,6 +79,12 @@ For the last few years, I have been part of a great learning curve wherein I hav
    
 2. **Cloning the Repository in Cloud SDK**: We will be cloning the repository in cloud SDK and will be runnning our terraform from there. Terraform is preinstalled in cloud SDK.
 
+3. Simple Steps to run the terraform code:
+
+    a. terraform init
+    b. terraform plan
+    c. terraform apply
+
 ## Pipeline construction using Terraform components
 
 ### 1. **Create GCS Buckets**
@@ -142,7 +148,13 @@ resource "google_storage_bucket_object" "function_source_archive" {
       bucket = google_storage_bucket.kubeflow-testing.name
       source = "/home/<GCP User ID>/GCP-Infra-for-Data-AI-using-Terraform/function.zip" # Path to your local zip file
     }
-``` 
+```
+After this there a few files to be copied to GCS bucket. So run the commands below:
+
+```cmd
+gsutil cp ./Template/* gs://demo_bucket_kfl/Template/*
+gsutil cp german_data.csv gs://demo_bucket_kfl/
+```
 
 ### 2. **Create Pub/Sub Topics & Subscriptions**
 
