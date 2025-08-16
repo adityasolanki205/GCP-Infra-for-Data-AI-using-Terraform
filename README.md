@@ -570,7 +570,7 @@ resource "google_workbench_instance" "default" {
 1. [workbench.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/workbench.tf)
 
 #### 🎥 ***Demo Video***
-
+https://github.com/user-attachments/assets/f4535d08-7257-48cd-9962-43287d4db059
 
 ### 7. **Run pipeline from Workbench**
 
