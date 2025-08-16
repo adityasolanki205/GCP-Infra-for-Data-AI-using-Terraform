@@ -79,7 +79,7 @@ For the last few years, I have been part of a great learning curve wherein I hav
    
 2. **Cloning the Repository in Cloud SDK**: We will be cloning the repository in cloud SDK and will be runnning our terraform from there. Terraform is preinstalled in cloud SDK.
 
-
+#### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/3df5ea40-a11f-4947-84ad-52c5a674a4bf
 
 
@@ -162,6 +162,7 @@ gsutil cp ./Template/* gs://demo_bucket_kfl/Template/*
 gsutil cp german_data.csv gs://demo_bucket_kfl/
 ```
 
+#### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/c9bbe6e5-7d9c-41a7-9990-170e48341547
 
 ### 2. **Create Pub/Sub Topics & Subscriptions**
@@ -485,7 +486,7 @@ resource "google_artifact_registry_repository" "demo_mode_repo" {
 ##### Related Code
 1. [training_pipeline.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/training_pipeline.py)
 
-
+#### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/4622545d-fe28-4853-ae1e-cd91a6bc2ad7
 
     
@@ -535,6 +536,7 @@ resource "null_resource" "run_streaming_pipeline" {
 ##### Related code
 1. [batch-pipeline.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/batch-pipeline.py)
 
+#### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/77a170cf-69ac-4fe7-be9b-6b9b42bec228
   
 ### 6. **Provision Vertex AI Workbench**
@@ -566,7 +568,7 @@ resource "google_workbench_instance" "default" {
 
 So currently terraform cannot create Vertex AI pipelines. So please follow the video to create the pipeline. 
 
-
+#### 🎥 ***Demo Video***
 https://github.com/user-attachments/assets/a50a6993-cf79-43a7-b853-08fa3224e240
 
 
@@ -574,10 +576,12 @@ https://github.com/user-attachments/assets/a50a6993-cf79-43a7-b853-08fa3224e240
 
 Also  terraform cannot create Vertex AI model monitoring. So please follow the video to create the model monitoring and cloud alerting policy. 
 
+#### 🎥 ***Demo Videos***
+
+- Model Monitoring
 https://github.com/user-attachments/assets/f167feef-2ecd-441a-9aee-08c1bece8957
 
-
-https://github.com/user-attachments/assets/be34bd76-9cc5-4ce6-a1c7-b2b0d9961700
+- Cloud Alerting
 
 
 ### 9. **Deploy Cloud Functions**
@@ -621,6 +625,7 @@ resource "google_cloudfunctions2_function" "pubsub_fn" {
 ##### Related code
 1. [batch-pipeline.py](https://github.com/adityasolanki205/Unified-ETL-DWH-MLOps-Pipeline/blob/main/batch-pipeline.py)
 
+#### 🎥 ***Demo Videos***
 https://github.com/user-attachments/assets/e7fbe515-aa10-463f-b50b-78767498d13a
 
 ### 10. **Delete Infrastructure (Optional)**
