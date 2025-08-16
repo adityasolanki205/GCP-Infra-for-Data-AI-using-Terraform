@@ -17,38 +17,38 @@ We use the [German Credit Risk dataset](https://www.kaggle.com/uciml/german-cred
 2. **Create Pub/Sub Topics & Subscriptions**  
    - Topics for streaming ingestion of real-time data.  
    - Subscriptions for downstream processing in Dataflow or Cloud Functions.
-   - [Go to Code explanation](#2-create-pub/sub-topics-&-subscriptions)
+   - [Go to Code explanation](#2-create-pubsub-topics--subscriptions)
 
 3. **Create BigQuery Datasets & Tables**  
    - Datasets for storing cleaned/transformed data and prediction results.  
    - Optimized schemas for analytics and machine learning use cases.
-   - [Go to Code explanation](#1-reading-the-data)
+   - [Go to Code explanation](#3-create-bigquery-datasets--tables)
 
 4. **Create Artifact Registry**  
    - Stores container images, model packages, and pipeline artifacts.  
    - Supports Docker and language-specific repositories.
-   - [Go to Code explanation](#1-reading-the-data)
+   - [Go to Code explanation](#4-create-artifact-registry)
 
 5. **Create Dataflow Jobs**  
    - Batch and streaming jobs for ETL pipelines using Apache Beam.  
    - Automatically triggered for historical and real-time data processing.
-   - [Go to Code explanation](#1-reading-the-data) 
+   - [Go to Code explanation](#5-create-dataflow-jobs) 
 
 6. **Provision Vertex AI Workbench**  
    - Instances for data exploration, feature engineering, and model development.
-   - [Go to Code explanation](#1-reading-the-data)
+   - [Go to Code explanation](#6-provision-vertex-ai-workbench)
 
 7. **Run pipeline from Workbench (Without terraform)**
    - Run the pipeline to from workbench. Currently there is no terraform code available.
-   - [Go to Code explanation](#1-reading-the-data) 
+   - [Go to Code explanation](#7-run-pipeline-from-workbench) 
 
 9. **Create Model Monitoring and cloud alerting (Without terraform)**
    - Similar to Vertex AI pipeline, there is not terraform code avaialble for model_monitoring and cloud alerting policy
-   - [Go to Code explanation](#1-reading-the-data)
+   - [Go to Code explanation](#8-create-model-monitoring-and-cloud-alerting)
 
 11. **Deploy Cloud Functions**  
    - Event-driven functions for pipeline orchestration, model retraining, and alerts handling.
-   - [Go to Code explanation](#1-reading-the-data)  
+   - [Go to Code explanation](#9-deploy-cloud-functions)  
 
 
 ## Motivation
