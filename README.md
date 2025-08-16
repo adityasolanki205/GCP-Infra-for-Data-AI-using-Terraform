@@ -42,11 +42,11 @@ We use the [German Credit Risk dataset](https://www.kaggle.com/uciml/german-cred
    - Run the pipeline to from workbench. Currently there is no terraform code available.
    - [Go to Code explanation](#7-run-pipeline-from-workbench) 
 
-9. **Create Model Monitoring and cloud alerting (Without terraform)**
+8. **Create Model Monitoring and cloud alerting (Without terraform)**
    - Similar to Vertex AI pipeline, there is not terraform code avaialble for model_monitoring and cloud alerting policy
    - [Go to Code explanation](#8-create-model-monitoring-and-cloud-alerting)
 
-11. **Deploy Cloud Functions**  
+9. **Deploy Cloud Functions**  
    - Event-driven functions for pipeline orchestration, model retraining, and alerts handling.
    - [Go to Code explanation](#9-deploy-cloud-functions)  
 
