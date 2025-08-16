@@ -79,10 +79,12 @@ For the last few years, I have been part of a great learning curve wherein I hav
    
 2. **Cloning the Repository in Cloud SDK**: We will be cloning the repository in cloud SDK and will be runnning our terraform from there. Terraform is preinstalled in cloud SDK.
 
-3. Simple Steps to run the terraform code:
+3. **Simple Steps to run the terraform code**:
 
     a. terraform init
+   
     b. terraform plan
+
     c. terraform apply
 
 ## Pipeline construction using Terraform components
