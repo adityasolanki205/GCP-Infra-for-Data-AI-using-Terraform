@@ -652,13 +652,6 @@ https://github.com/user-attachments/assets/e7fbe515-aa10-463f-b50b-78767498d13a
 
 Comment all the codes and it will delete all the infrastructure.
 
-## Implementation
-To test the code we need to do the following:
-
-    1. Copy the repository in Cloud SDK using below command:
-    git clone https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform.git
-    
-    2. Keep following steps as mentioned above. 
 
 ## Credits
 1. Akash Nimare's [README.md](https://gist.github.com/akashnimare/7b065c12d9750578de8e705fb4771d2f#file-readme-md)
