@@ -11,35 +11,44 @@ We use the [German Credit Risk dataset](https://www.kaggle.com/uciml/german-cred
 
 1. **Create GCS Buckets**  
    - Storage for raw data, processed datasets, model artifacts, and logs.  
-   - Configurable bucket names, locations, and lifecycle rules.  
+   - Configurable bucket names, locations, and lifecycle rules.
+   - [Go to Code explanation](#1-create-gcs-buckets)
 
 2. **Create Pub/Sub Topics & Subscriptions**  
    - Topics for streaming ingestion of real-time data.  
    - Subscriptions for downstream processing in Dataflow or Cloud Functions.
+   - [Go to Code explanation](#2-create-pub/sub-topics-&-subscriptions)
 
 3. **Create BigQuery Datasets & Tables**  
    - Datasets for storing cleaned/transformed data and prediction results.  
-   - Optimized schemas for analytics and machine learning use cases. 
+   - Optimized schemas for analytics and machine learning use cases.
+   - [Go to Code explanation](#1-reading-the-data)
 
 4. **Create Artifact Registry**  
    - Stores container images, model packages, and pipeline artifacts.  
-   - Supports Docker and language-specific repositories.  
+   - Supports Docker and language-specific repositories.
+   - [Go to Code explanation](#1-reading-the-data)
 
 5. **Create Dataflow Jobs**  
    - Batch and streaming jobs for ETL pipelines using Apache Beam.  
-   - Automatically triggered for historical and real-time data processing.   
+   - Automatically triggered for historical and real-time data processing.
+   - [Go to Code explanation](#1-reading-the-data) 
 
 6. **Provision Vertex AI Workbench**  
    - Instances for data exploration, feature engineering, and model development.
+   - [Go to Code explanation](#1-reading-the-data)
 
 7. **Run pipeline from Workbench (Without terraform)**
-   - Run the pipeline to from workbench. Currently there is no terraform code available. 
+   - Run the pipeline to from workbench. Currently there is no terraform code available.
+   - [Go to Code explanation](#1-reading-the-data) 
 
 9. **Create Model Monitoring and cloud alerting (Without terraform)**
    - Similar to Vertex AI pipeline, there is not terraform code avaialble for model_monitoring and cloud alerting policy
+   - [Go to Code explanation](#1-reading-the-data)
 
 11. **Deploy Cloud Functions**  
-   - Event-driven functions for pipeline orchestration, model retraining, and alerts handling.  
+   - Event-driven functions for pipeline orchestration, model retraining, and alerts handling.
+   - [Go to Code explanation](#1-reading-the-data)  
 
 
 ## Motivation
@@ -65,7 +74,7 @@ For the last few years, I have been part of a great learning curve wherein I hav
 - [Apache Beam](https://beam.apache.org/documentation/programming-guide/)
 - [Google DataFlow](https://cloud.google.com/dataflow)
 - [Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs)
-- 
+
 ## Cloning Repository
 
 ```bash
@@ -570,7 +579,7 @@ resource "google_workbench_instance" "default" {
 1. [workbench.tf](https://github.com/adityasolanki205/GCP-Infra-for-Data-AI-using-Terraform/blob/main/workbench.tf)
 
 #### 🎥 ***Demo Video***
-
+https://github.com/user-attachments/assets/f4535d08-7257-48cd-9962-43287d4db059
 
 ### 7. **Run pipeline from Workbench**
 
